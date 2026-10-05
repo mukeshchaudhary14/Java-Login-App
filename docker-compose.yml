@@ -19,9 +19,9 @@ services:
       dockerfile: Dockerfile
     container_name: tier2-backend
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/${MYSQL_DATABASE:-UserDB}?useSSL=false&allowPublicKeyRetrieval=true
-      - SPRING_DATASOURCE_USERNAME=${MYSQL_USER:-admin}
-      - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD:-Admin123}
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/${MYSQL_DATABASE}?useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=${MYSQL_USER}
+      - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD}
     expose:
       - "8080"
     networks:
@@ -36,10 +36,10 @@ services:
     image: mysql:8.0
     container_name: tier3-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword123}
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-UserDB}
-      MYSQL_USER: ${MYSQL_USER:-admin}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-Admin123}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
       - db-data:/var/lib/mysql
